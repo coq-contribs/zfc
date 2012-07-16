@@ -33,7 +33,7 @@
 (* most  of Aczel's encoding of CZF at the end of the file. Many           *)
 (* definitions are common to both aproaches.                               *)
 
-
+Set Asymmetric Patterns.
 (* The type representing sets  (Ensemble = french for set) *)
 
 Inductive Ens : Type :=

@@ -16,6 +16,8 @@
 
 (* Contribution to the Coq Library   V6.3 (July 1999)                    *)
 
+Global Set Asymmetric Patterns.
+
 (* The type representing sets  (Ensemble = french for set) *)
 
 Inductive Ens : Type :=
