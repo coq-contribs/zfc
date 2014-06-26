@@ -36,7 +36,7 @@ Require Import Axioms.
 Definition EQC : Ens -> Ens -> Type.
 simple induction 1; intros A f eq1.
 simple induction 1; intros B g eq2.
-apply prod_t.
+refine (prod_t _ _).
 exact (forall x : A, depprod _ (fun y : B => eq1 x (g y))).
 exact (forall y : B, depprod _ (fun x : A => eq1 x (g y))).
 Defined.
