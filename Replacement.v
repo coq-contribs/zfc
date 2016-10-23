@@ -51,11 +51,11 @@ simpl in |- *; intros X i.
 elim i; intros a ea.
 exists (f (g a)).
 split.
-exists a; auto with zfc v62.
-apply comp with (g a); auto with zfc v62.
+exists a; auto with zfc.
+apply comp with (g a); auto with zfc.
 unfold choice in H.
 apply H; intros.
-elim (G a); intros b hb; exists b; auto with zfc v62.
+elim (G a); intros b hb; exists b; auto with zfc.
 Qed.
 
 
@@ -94,20 +94,20 @@ intros HC.
 apply
  (IN_Comp_P Y y
     (fun y0 : Ens => EXType Ens (fun x : Ens => IN x X /\ P x y0)));
- auto with zfc v62.
+ auto with zfc.
 intros w1 w2; simple induction 1; intros x; simple induction 1;
  intros Ix Px e.
-exists x; split; auto with zfc v62.
-apply comp_r with w1; auto with zfc v62.
+exists x; split; auto with zfc.
+apply comp_r with w1; auto with zfc.
 intros He.
 apply IN_P_Comp.
 
 intros w1 w2; simple induction 1; intros x; simple induction 1;
  intros Ix Px e.
-exists x; split; auto with zfc v62.
-apply comp_r with w1; auto with zfc v62.
-apply HY; auto with zfc v62.
-auto with zfc v62.
+exists x; split; auto with zfc.
+apply comp_r with w1; auto with zfc.
+apply HY; auto with zfc.
+auto with zfc.
 
 elim
  (Collection
@@ -121,31 +121,31 @@ intros y; simple induction 1; intros x; simple induction 1; intros Hx1 Hx2.
 elim (HY x Hx1).
 intros y'; simple induction 1; intros Hy'1 Hy'2.
 elim Hy'2.
-intros Hy'3; apply IN_sound_left with y'; auto with zfc v62.
-apply fp with x; auto with zfc v62.
+intros Hy'3; apply IN_sound_left with y'; auto with zfc.
+apply fp with x; auto with zfc.
 simple induction 1; intros Hy'3 Hy'4.
 elim (Hy'3 y Hx2).
 intros HP; exists (Comp Y (fun y : Ens => EQ y Vide -> False)).
 intros y; simple induction 1; intros x; simple induction 1; intros Hx1 Hx2.
 apply IN_P_Comp.
-intros w1 w2 Hw1 Hw Hw2; apply Hw1; apply EQ_tran with w2; auto with zfc v62.
+intros w1 w2 Hw1 Hw Hw2; apply Hw1; apply EQ_tran with w2; auto with zfc.
 elim (HY x).
 intros y'; simple induction 1; intros Hy'1 Hy'2.
 elim Hy'2; intros Hy'3.
-apply IN_sound_left with y'; auto with zfc v62.
-apply fp with x; auto with zfc v62.
+apply IN_sound_left with y'; auto with zfc.
+apply fp with x; auto with zfc.
 elim Hy'3; intros Hy'4 Hy'5.
-elim (Hy'4 y); auto with zfc v62.
+elim (Hy'4 y); auto with zfc.
 assumption.
-intros e; apply HP; exists x; split; auto with zfc v62; apply comp_r with y;
- auto with zfc v62; apply fp; auto with zfc v62.
+intros e; apply HP; exists x; split; auto with zfc; apply comp_r with y;
+ auto with zfc; apply fp; auto with zfc.
 intros x x' y e Hx; elim Hx; intros Hx1.
-left; apply comp_l with x; auto with zfc v62.
+left; apply comp_l with x; auto with zfc.
 right; elim Hx1; intros Hx2 Hx3; split.
 2: assumption.
-intros y' Hy'; apply (Hx2 y'); apply comp_l with x'; auto with zfc v62.
+intros y' Hy'; apply (Hx2 y'); apply comp_l with x'; auto with zfc.
 intros x; elim (EM (EXType _ (fun y : Ens => P x y))); intros Hx.
 elim Hx; intros x0 Hx0; exists x0; left; assumption.
-exists Vide; right; split; auto with zfc v62.
-intros y Hy; elim Hx; exists y; auto with zfc v62.
+exists Vide; right; split; auto with zfc.
+intros y Hy; elim Hx; exists y; auto with zfc.
 Qed.

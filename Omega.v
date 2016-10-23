@@ -42,7 +42,7 @@ Defined.
 
 (*
 Theorem Nat_Ord : (n:nat)(Ord (Nat n)).
-Induction n; Simpl; Auto with zfc v62.
+Induction n; Simpl; Auto with zfc.
 Save.
 *)
 
@@ -50,14 +50,14 @@ Definition Omega : Ens := sup nat Nat.
 
 Theorem IN_Class_succ : forall E : Ens, IN E (Class_succ E).
 intros E; unfold Class_succ in |- *; unfold Sing in |- *;
- apply IN_Union with (Paire E E); auto with zfc v62.
+ apply IN_Union with (Paire E E); auto with zfc.
 Qed.
 
 
 Theorem INC_Class_succ : forall E : Ens, INC E (Class_succ E).
 unfold INC in |- *; unfold Class_succ in |- *.
 intros.
-apply IN_Union with E; auto with zfc v62.
+apply IN_Union with E; auto with zfc.
 Qed.
 
 Hint Resolve IN_Class_succ INC_Class_succ: zfc.
@@ -70,10 +70,10 @@ unfold Class_succ in i.
 elim (Union_IN (Paire E (Sing E)) E' i).
 intros E1; simple induction 1; intros i1 i2.
 elim (Paire_IN E (Sing E) E1 i1).
-intros; right; apply IN_sound_right with E1; auto with zfc v62.
+intros; right; apply IN_sound_right with E1; auto with zfc.
 intros; left; cut (IN E' (Sing E)).
-auto with zfc v62.
-apply IN_sound_right with E1; auto with zfc v62.
+auto with zfc.
+apply IN_sound_right with E1; auto with zfc.
 
 Qed.
 
@@ -87,13 +87,13 @@ elim (IN_EXType (sup A f) (sup A f) i); intros a e.
 simpl in a.
 change (EQ (sup A f) (f a)) in e.
 elim (r a).
-apply IN_sound_right with (sup A f); auto with zfc v62.
-exists a; auto with zfc v62.
+apply IN_sound_right with (sup A f); auto with zfc.
+exists a; auto with zfc.
 Qed.
 
 
 Theorem Nat_IN_Omega : forall n : nat, IN (Nat n) Omega.
-intros; simpl in |- *; exists n; auto with zfc v62.
+intros; simpl in |- *; exists n; auto with zfc.
 Qed.
 Hint Resolve Nat_IN_Omega: zfc.
 
@@ -102,7 +102,7 @@ Theorem IN_Omega_EXType :
  forall E : Ens, IN E Omega -> EXType _ (fun n : nat => EQ (Nat n) E).
 simpl in |- *; simple induction 1.
 intros n e.
-exists n; auto with zfc v62.
+exists n; auto with zfc.
 Qed.
 
 Theorem IN_Nat_EXType :
@@ -117,10 +117,10 @@ intros.
 change (IN E (Class_succ (Nat n0))) in H0.
 elim (IN_Class_succ_or (Nat n0) E H0).
 intros; exists n0.
-auto with zfc v62.
+auto with zfc.
 
 intros.
-elim (H E); auto with zfc v62.
+elim (H E); auto with zfc.
 Qed.
 
 
@@ -129,13 +129,13 @@ apply INC_EQ; unfold INC in |- *.
 intros.
 elim (IN_Omega_EXType E H); intros n e.
 apply IN_Union with (Nat (S n)).
-auto with zfc v62.
+auto with zfc.
 
 apply IN_sound_left with (Nat n).
-auto with zfc v62.
+auto with zfc.
 
-auto with zfc v62.
-change (IN (Nat n) (Class_succ (Nat n))) in |- *; auto with zfc v62.
+auto with zfc.
+change (IN (Nat n) (Class_succ (Nat n))) in |- *; auto with zfc.
 
 intros.
 elim (Union_IN Omega E H).
@@ -147,9 +147,9 @@ intros n e1.
 cut (IN E (Nat n)).
 intros.
 elim (IN_Nat_EXType n E H0); intros.
-apply IN_sound_left with (Nat x); auto with zfc v62.
+apply IN_sound_left with (Nat x); auto with zfc.
 
-apply IN_sound_right with e; auto with zfc v62.
+apply IN_sound_right with e; auto with zfc.
 Qed.
 
 (*
@@ -160,13 +160,13 @@ apply Lo.
 intros.
 elim (IN_Omega_EXType e H).
 intros n ee.
-apply Eo with (Nat n); Auto with zfc v62.
+apply Eo with (Nat n); Auto with zfc.
 elim n.
-auto with zfc v62.
-auto with zfc v62.
+auto with zfc.
+auto with zfc.
 intros.
-change (Ord (Class_succ (Nat n0))); Auto with zfc v62.
-apply EQ_sym; Auto with zfc v62.
+change (Ord (Class_succ (Nat n0))); Auto with zfc.
+apply EQ_sym; Auto with zfc.
 apply Omega_EQ_Union.
 
 Save.

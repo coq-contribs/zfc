@@ -131,10 +131,10 @@ Theorem INC_EQ : forall E E' : Ens, INC E E' -> INC E' E -> EQ E E'.
 simple induction E; intros A f r; simple induction E'; intros A' f' r';
  unfold INC in |- *; simpl in |- *; intros I1 I2; split.
 intros a; apply I1.
-exists a; auto with zfc v62.
+exists a; auto with zfc.
 intros a'; cut (EXType A (fun x : A => EQ (f' a') (f x))).
-simple induction 1; intros a ea; exists a; auto with zfc v62.
-apply I2; exists a'; auto with zfc v62.
+simple induction 1; intros a ea; exists a; auto with zfc.
+apply I2; exists a'; auto with zfc.
 Qed.
 
 Hint Resolve INC_EQ: zfc.
@@ -145,7 +145,7 @@ Hint Resolve INC_EQ: zfc.
 Theorem IN_sound_left :
  forall E E' E'' : Ens, EQ E E' -> IN E E'' -> IN E' E''.
 simple induction E''; intros A'' f'' r'' e; simpl in |- *; simple induction 1;
- intros a'' p; exists a''; apply EQ_tran with E; auto with zfc v62.
+ intros a'' p; exists a''; apply EQ_tran with E; auto with zfc.
 Qed.
 
 Theorem IN_sound_right :
@@ -161,11 +161,11 @@ Qed.
 (* Inclusion is reflexive, transitive, extentional *)
 
 Theorem INC_refl : forall E : Ens, INC E E.
-unfold INC in |- *; auto with zfc v62.
+unfold INC in |- *; auto with zfc.
 Qed.
 
 Theorem INC_tran : forall E E' E'' : Ens, INC E E' -> INC E' E'' -> INC E E''.
-unfold INC in |- *; auto with zfc v62.
+unfold INC in |- *; auto with zfc.
 Qed.
 
 
@@ -173,7 +173,7 @@ Theorem INC_sound_left :
  forall E E' E'' : Ens, EQ E E' -> INC E E'' -> INC E' E''.
 simple induction E''; unfold INC in |- *; simpl in |- *;
  intros A f HR e H1 E0 i; apply H1.
-apply IN_sound_right with E'; auto with zfc v62.
+apply IN_sound_right with E'; auto with zfc.
 Qed.
 
 Theorem INC_sound_right :
@@ -182,7 +182,7 @@ simple induction E'; simple induction E''; unfold INC in |- *; simpl in |- *;
  intros.
 elim (H2 E0); try assumption; intros.
 elim H1; intros HA HB; elim (HA x); intros.
-exists x0; apply EQ_tran with (e x); auto with zfc v62.
+exists x0; apply EQ_tran with (e x); auto with zfc.
 Qed.
 
 
@@ -211,8 +211,8 @@ Theorem tout_vide_est_Vide :
  forall E : Ens, (forall E' : Ens, IN E' E -> F) -> EQ E Vide.
  unfold Vide in |- *; simple induction E; simpl in |- *; intros A e H H0;
   split.
-intros; elim (H0 (e x)); auto with zfc v62.
-exists x; auto with zfc v62.
+intros; elim (H0 (e x)); auto with zfc.
+exists x; auto with zfc.
 simple induction y.
 Qed.
 
@@ -234,25 +234,25 @@ unfold Paire in |- *.
 simpl in |- *.
 intros; split.
 simple induction x.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 
 simple induction y; simpl in |- *.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 Qed.
 
 Theorem Paire_sound_right :
  forall A B B' : Ens, EQ B B' -> EQ (Paire A B) (Paire A B').
 unfold Paire in |- *; simpl in |- *; intros; split.
 simple induction x.
-exists true; auto with zfc v62.
-exists false; auto with zfc v62.
+exists true; auto with zfc.
+exists false; auto with zfc.
 simple induction y.
-exists true; auto with zfc v62.
-exists false; auto with zfc v62.
+exists true; auto with zfc.
+exists false; auto with zfc.
 Qed.
 
 Hint Resolve Paire_sound_right Paire_sound_left: zfc.
@@ -261,18 +261,18 @@ Hint Resolve Paire_sound_right Paire_sound_left: zfc.
 
 Theorem IN_Paire_left : forall E E' : Ens, IN E (Paire E E').
 unfold Paire in |- *; simpl in |- *; exists true; simpl in |- *;
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Theorem IN_Paire_right : forall E E' : Ens, IN E' (Paire E E').
 unfold Paire in |- *; simpl in |- *; exists false; simpl in |- *;
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Theorem Paire_IN :
  forall E E' A : Ens, IN A (Paire E E') -> EQ A E \/ EQ A E'.
 unfold Paire in |- *; simpl in |- *.
-simple induction 1; intros b; elim b; simpl in |- *; auto with zfc v62.
+simple induction 1; intros b; elim b; simpl in |- *; auto with zfc.
 Qed.
 
 Hint Resolve IN_Paire_left IN_Paire_right Vide_est_vide: zfc.
@@ -285,12 +285,12 @@ Definition Sing (E : Ens) := Paire E E.
 (* The axioms  *)
 
 Theorem IN_Sing : forall E : Ens, IN E (Sing E).
-unfold Sing in |- *; auto with zfc v62.
+unfold Sing in |- *; auto with zfc.
 Qed.
 
 Theorem IN_Sing_EQ : forall E E' : Ens, IN E (Sing E') -> EQ E E'.
 unfold Sing in |- *; intros E E' H; elim (Paire_IN E' E' E);
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 
@@ -299,15 +299,15 @@ Hint Resolve IN_Sing IN_Sing_EQ: zfc.
 
 Theorem Sing_sound : forall A A' : Ens, EQ A A' -> EQ (Sing A) (Sing A').
 unfold Sing in |- *; intros; apply EQ_tran with (Paire A A');
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Hint Resolve Sing_sound: zfc.
 
 Theorem EQ_Sing_EQ : forall E1 E2 : Ens, EQ (Sing E1) (Sing E2) -> EQ E1 E2.
 intros; cut (IN E1 (Sing E2)).
-intros; auto with zfc v62.
-apply IN_sound_right with (Sing E1); auto with zfc v62.
+intros; auto with zfc.
+apply IN_sound_right with (Sing E1); auto with zfc.
 Qed.
 
 Hint Resolve EQ_Sing_EQ: zfc.
@@ -332,7 +332,7 @@ Defined.
 
 Theorem Comp_INC : forall (E : Ens) (P : Ens -> Prop), INC (Comp E P) E.
 unfold Comp, INC in |- *; simple induction E; simpl in |- *; intros.
-elim H0; simple induction x; intros; exists x0; auto with zfc v62.
+elim H0; simple induction x; intros; exists x0; auto with zfc.
 Qed.
 
 Theorem IN_Comp_P :
@@ -340,7 +340,7 @@ Theorem IN_Comp_P :
  (forall w1 w2 : Ens, P w1 -> EQ w1 w2 -> P w2) -> IN A (Comp E P) -> P A.
 simple induction E; simpl in |- *; intros B f Hr A P H i; elim i; intros c;
  elim c; simpl in |- *; intros x q e; apply H with (f x); 
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Theorem IN_P_Comp :
@@ -352,8 +352,8 @@ simple induction E; simpl in |- *; intros B f HR A P H i; elim i;
 cut (P (f x)).
 intros Pf.
 exists (exist B (fun x : B => P (f x)) x Pf); simpl in |- *;
- auto with zfc v62.
-apply H with A; auto with zfc v62.
+ auto with zfc.
+apply H with A; auto with zfc.
 Qed.
 
 (* Again, extentionality is not stated, but easy *)
@@ -402,7 +402,7 @@ simple induction E; simpl in |- *.
 intros A f r.
 simple induction 1; simpl in |- *.
 intros.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 Qed.
 
 (* The union axioms *)
@@ -415,7 +415,7 @@ intros.
 simpl in |- *.
 elim (IN_EXType (sup A f) E' H).
 intros x e.
-cut (EQ (pi2 (sup A f) x) E'); auto with zfc v62.
+cut (EQ (pi2 (sup A f) x) E'); auto with zfc.
 intros e1.
 cut (IN E'' (pi2 (sup A f) x)).
 intros i1.
@@ -425,7 +425,7 @@ simpl in x0.
 exists (dep_i A (fun x : A => pi1 (f x)) x x0).
 simpl in |- *.
 exact e2.
-apply IN_sound_right with E'; auto with zfc v62.
+apply IN_sound_right with E'; auto with zfc.
 Qed.
 
 
@@ -437,8 +437,8 @@ intros a e; simpl in a; simpl in e.
 elim (IN_EXType E' E'' i').
 cut (IN E'' (f a)).
 intros i'' a' e''; elim (IN_EXType _ _ i''); simpl in |- *; intros aa ee.
-exists (dep_i A (fun x : A => pi1 (f x)) a aa); auto with zfc v62.
-apply IN_sound_right with E'; auto with zfc v62.
+exists (dep_i A (fun x : A => pi1 (f x)) a aa); auto with zfc.
+apply IN_sound_right with E'; auto with zfc.
 Qed.
 
 Theorem Union_IN :
@@ -451,13 +451,13 @@ intros a b; simpl in |- *.
 intros.
 exists (f a).
 split.
-exists a; auto with zfc v62.
+exists a; auto with zfc.
 
-apply IN_sound_left with (pi2 (f a) b); auto with zfc v62.
+apply IN_sound_left with (pi2 (f a) b); auto with zfc.
 simpl in |- *.
 generalize b; elim (f a); simpl in |- *.
 intros.
-exists b0; auto with zfc v62.
+exists b0; auto with zfc.
 Qed.
 
 
@@ -470,12 +470,12 @@ unfold Union in |- *; simple induction E; intros A f r; simple induction E';
 intros x; elim x; intros a aa; elim (e1 a); intros a' ea.
 elim (EQ_EXType (f a) (f' a') ea aa); intros aa' eaa.
 exists (dep_i A' (fun x : A' => pi1 (f' x)) a' aa'); simpl in |- *;
- auto with zfc v62.
+ auto with zfc.
 intros c'; elim c'; intros a' aa'; elim (e2 a'); intros a ea.
 cut (EQ (f' a') (f a)).
-2: auto with zfc v62.
+2: auto with zfc.
 intros ea'; elim (EQ_EXType (f' a') (f a) ea' aa'); intros aa eaa.
-exists (dep_i A (fun x : A => pi1 (f x)) a aa); auto with zfc v62.
+exists (dep_i A (fun x : A => pi1 (f x)) a aa); auto with zfc.
 
 Qed.
 
@@ -487,8 +487,8 @@ Theorem Union_mon : forall E E' : Ens, INC E E' -> INC (Union E) (Union E').
 unfold INC in |- *; intros E E' IEE E'' IEE''.
 elim (Union_IN E E'').
 intros E'''; simple induction 1; intros I1 I2.
-apply IN_Union with E'''; auto with zfc v62.
-auto with zfc v62.
+apply IN_Union with E'''; auto with zfc.
+auto with zfc.
 
 Qed.
 
@@ -522,8 +522,8 @@ simple induction 1; intros c; elim c; intros a ca; elim ca; intros aa paa;
  simpl in |- *.
 intros e E'' e''.
 elim e''; intros a1 ea1.
-apply IN_sound_right with (f a1); auto with zfc v62.
-apply IN_sound_left with (pi2 (f a) aa); auto with zfc v62.
+apply IN_sound_right with (f a1); auto with zfc.
+apply IN_sound_left with (pi2 (f a) aa); auto with zfc.
 Qed.
 
 Theorem all_IN_Inter :
@@ -534,9 +534,9 @@ intros E' E'' i H.
 elim (IN_EXType (sup A f) E'' i).
 intros a e; simpl in a.
 simpl in e.
-cut (IN E' E''); auto with zfc v62.
+cut (IN E' E''); auto with zfc.
 intros i'.
-cut (IN E' (f a)); auto with zfc v62.
+cut (IN E' (f a)); auto with zfc.
 intros i0.
 elim (IN_EXType (f a) E' i0).
 intros b e'.
@@ -551,16 +551,16 @@ exists
     (dep_i (pi1 (f a))
        (fun b : pi1 (f a) => forall x : A, IN (pi2 (f a) b) (f x)) b H0)).
 simpl in |- *.
-auto with zfc v62.
-auto with zfc v62.
+auto with zfc.
+auto with zfc.
 intros.
 apply IN_sound_left with E'.
-auto with zfc v62.
+auto with zfc.
 apply H.
-auto with zfc v62.
+auto with zfc.
 simpl in |- *.
-exists x; auto with zfc v62.
-apply IN_sound_right with E''; auto with zfc v62.
+exists x; auto with zfc.
+apply IN_sound_right with E''; auto with zfc.
 Qed.
 
 
@@ -593,8 +593,8 @@ intros E''; simple induction 1; intros a' e.
 elim (HA a').
 simple induction x; intros a p.
 intros; exists a.
-auto with zfc v62.
-apply EQ_tran with (f' a'); auto with zfc v62.
+auto with zfc.
+apply EQ_tran with (f' a'); auto with zfc.
 Qed.
 
 
@@ -606,23 +606,23 @@ exists (fun a : A => IN (f a) (sup A' f')).
 simpl in |- *.
 split.
 intros.
-elim (i (f' x)); auto with zfc v62.
+elim (i (f' x)); auto with zfc.
 intros a e.
-cut (EQ (f a) (f' x)); auto with zfc v62.
+cut (EQ (f a) (f' x)); auto with zfc.
 intros e1.
 exists
  (dep_i A (fun a : A => EXType A' (fun y : A' => EQ (f a) (f' y))) a
     (EXTypei A' (fun y : A' => EQ (f a) (f' y)) x e1)).
 simpl in |- *.
-auto with zfc v62.
+auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 simpl in |- *.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 
 simple induction y; simpl in |- *.
 simple induction 1; intros.
-exists x0; auto with zfc v62.
+exists x0; auto with zfc.
 Qed.
 
 Theorem Power_mon : forall E E' : Ens, INC E E' -> INC (Power E) (Power E').
@@ -630,8 +630,8 @@ intros.
 unfold INC in |- *; intros.
 apply INC_IN_Power.
 cut (INC E0 E).
-unfold INC in |- *; unfold INC in H; intros; auto with zfc v62.
-apply IN_Power_INC; auto with zfc v62.
+unfold INC in |- *; unfold INC in H; intros; auto with zfc.
+apply IN_Power_INC; auto with zfc.
 Qed.
 
 Theorem Power_sound : forall E E' : Ens, EQ E E' -> EQ (Power E) (Power E').
@@ -641,13 +641,13 @@ intros A i.
 cut (INC A E').
 intros; apply INC_IN_Power; assumption.
 cut (INC A E); intros.
-apply INC_sound_right with E; auto with zfc v62.
+apply INC_sound_right with E; auto with zfc.
 apply IN_Power_INC; assumption.
 intros A i.
 cut (INC A E).
 intros; apply INC_IN_Power; assumption.
 cut (INC A E'); intros.
-apply INC_sound_right with E'; auto with zfc v62.
+apply INC_sound_right with E'; auto with zfc.
 apply IN_Power_INC; assumption.
 Qed.
 
@@ -662,7 +662,7 @@ intros E e; cut False.
 simple induction 1.
 cut (IN E Vide).
 simpl in |- *; simple induction 1; intros xx; elim xx; simple induction 1.
-apply IN_sound_right with (Sing E); auto with zfc v62.
+apply IN_sound_right with (Sing E); auto with zfc.
 Qed.
 
 
@@ -671,7 +671,7 @@ intros E e; cut False.
 simple induction 1.
 cut (IN E Vide).
 simpl in |- *; simple induction 1; intros xx; elim xx; simple induction 1.
-apply IN_sound_right with (Sing E); auto with zfc v62.
+apply IN_sound_right with (Sing E); auto with zfc.
 Qed.
 
 
@@ -694,7 +694,7 @@ simple induction 1.
 intros HA HB; elim (HA true).
 intros x; elim x; simpl in |- *; simple induction 1; intros H3 H4;
  elim (H3 true); simpl in |- *; intros xx; elim xx; 
- simpl in |- *; auto with zfc v62.
+ simpl in |- *; auto with zfc.
 elim (H4 false); simpl in |- *.
 simple induction x0; simpl in |- *.
 intros.
@@ -704,7 +704,7 @@ simple induction 1.
 intros yy; elim (yy true).
 simple induction x1.
 
-apply EQ_tran with A; auto with zfc v62.
+apply EQ_tran with A; auto with zfc.
 
 intros; cut (EQ (Sing B') Vide).
 simpl in |- *.
@@ -712,24 +712,24 @@ simple induction 1.
 intros yy; elim (yy true).
 simple induction x1.
 
-apply EQ_tran with A; auto with zfc v62.
+apply EQ_tran with A; auto with zfc.
 
 intros yy.
 elim (HB true); simpl in |- *.
 simple induction x0.
 change (EQ (Sing A) (Sing B) -> EQ A B) in |- *; intros EE.
 apply IN_Sing_EQ.
-apply IN_sound_right with (Sing A); auto with zfc v62.
+apply IN_sound_right with (Sing A); auto with zfc.
 change (EQ (Paire Vide (Sing A')) (Sing B) -> EQ A B) in |- *.
 intros zz.
 elimtype F.
 apply (not_EQ_Sing_Vide A').
 apply EQ_tran with B.
 apply IN_Sing_EQ.
-apply IN_sound_right with (Paire Vide (Sing A')); auto with zfc v62.
+apply IN_sound_right with (Paire Vide (Sing A')); auto with zfc.
 apply EQ_sym; apply IN_Sing_EQ;
  apply IN_sound_right with (Paire Vide (Sing A')); 
- auto with zfc v62.
+ auto with zfc.
 
 Qed.
 
@@ -748,20 +748,20 @@ simple induction 1.
 apply (not_EQ_Vide_Sing A').
 apply EQ_tran with B.
 apply IN_Sing_EQ; apply IN_sound_right with (Paire Vide (Sing A'));
- auto with zfc v62.
+ auto with zfc.
 apply EQ_sym; apply IN_Sing_EQ;
  apply IN_sound_right with (Paire Vide (Sing A')); 
- auto with zfc v62.
+ auto with zfc.
 change (EQ (Paire Vide (Sing A')) (Paire Vide (Sing B')) -> EQ A' B') in |- *.
 intros HP; cut (EQ (Sing A') (Sing B')).
-intros; auto with zfc v62.
+intros; auto with zfc.
 cut (IN (Sing A') (Paire Vide (Sing B'))).
 intros HI; elim (Paire_IN Vide (Sing B') (Sing A') HI).
 intros; cut F.
 simple induction 1.
 apply not_EQ_Sing_Vide with A'; assumption.
-trivial with zfc v62.
-apply IN_sound_right with (Paire Vide (Sing A')); auto with zfc v62.
+trivial with zfc.
+apply IN_sound_right with (Paire Vide (Sing A')); auto with zfc.
 
 Qed.
 
@@ -791,12 +791,12 @@ Hint Resolve Paire_sound_left Paire_sound_right: zfc.
 
 Theorem Couple_sound_left :
  forall A A' B : Ens, EQ A A' -> EQ (Couple A B) (Couple A' B).
- unfold Couple in |- *; intros; auto with zfc v62.
+ unfold Couple in |- *; intros; auto with zfc.
 Qed.
 
 Theorem Couple_sound_right :
  forall A B B' : Ens, EQ B B' -> EQ (Couple A B) (Couple A B').
- unfold Couple in |- *; intros; auto with zfc v62.
+ unfold Couple in |- *; intros; auto with zfc.
 Qed.
 
 
@@ -810,12 +810,12 @@ intros x e1; simpl in x.
 elim (IN_EXType (sup A2 f2) E2').
 intros x0 e2; simpl in x.
 apply IN_sound_left with (Couple (pi2 (sup A1 f1) x) (pi2 (sup A2 f2) x0));
- auto with zfc v62.
-apply EQ_tran with (Couple (pi2 (sup A1 f1) x) E2'); auto with zfc v62.
+ auto with zfc.
+apply EQ_tran with (Couple (pi2 (sup A1 f1) x) E2'); auto with zfc.
 apply Couple_sound_right.
-auto with zfc v62.
+auto with zfc.
 
-apply Couple_sound_left; auto with zfc v62.
+apply Couple_sound_left; auto with zfc.
 
 simpl in |- *.
 simpl in |- *.
@@ -826,36 +826,36 @@ simple induction x1; simpl in |- *.
 exists true; simpl in |- *.
 split.
 simple induction x2; simpl in |- *.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-simple induction y; exists true; auto with zfc v62.
+simple induction y; exists true; auto with zfc.
 
 exists false; simpl in |- *.
 split.
 simple induction x2.
-exists true; simpl in |- *; auto with zfc v62.
+exists true; simpl in |- *; auto with zfc.
 split.
 simple induction x3.
 
 simple induction y.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 
 simple induction y; simpl in |- *.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 
 simple induction y; simpl in |- *.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 Qed.
 
 
@@ -871,12 +871,12 @@ cut (EQ E1' (f1 a1)).
 cut (EQ E2' (f2 a2)).
 intros e1 e2.
 split.
-apply IN_sound_left with (f1 a1); auto with zfc v62; simpl in |- *; exists a1;
- auto with zfc v62.
-apply IN_sound_left with (f2 a2); auto with zfc v62; simpl in |- *; exists a2;
- auto with zfc v62.
-apply Couple_inj_right with (A := E1') (B := f1 a1); auto with zfc v62.
-apply Couple_inj_left with E2' (f2 a2); auto with zfc v62.
+apply IN_sound_left with (f1 a1); auto with zfc; simpl in |- *; exists a1;
+ auto with zfc.
+apply IN_sound_left with (f2 a2); auto with zfc; simpl in |- *; exists a2;
+ auto with zfc.
+apply Couple_inj_right with (A := E1') (B := f1 a1); auto with zfc.
+apply Couple_inj_left with E2' (f2 a2); auto with zfc.
 Qed.
 
 
@@ -888,8 +888,8 @@ Theorem IN_Prod_EXType :
 simple induction E; intros A f r; simple induction E'; intros A' f' r'.
 intros; elim (IN_EXType (Prod (sup A f) (sup A' f')) E'').
 simple induction x.
-intros; exists (f a); exists (f' b); auto with zfc v62.
-auto with zfc v62.
+intros; exists (f a); exists (f' b); auto with zfc.
+auto with zfc.
 Qed.
 
 
@@ -914,21 +914,21 @@ exact (Succ X).
 Defined.
 
 Theorem Nat_Ord : forall n : nat, Ord (Nat n).
-simple induction n; simpl in |- *; auto with zfc v62.
+simple induction n; simpl in |- *; auto with zfc.
 Qed.
 
 Definition Omega : Ens := sup nat Nat.
 
 Theorem IN_Succ : forall E : Ens, IN E (Succ E).
 intros E; unfold Succ in |- *; unfold Sing in |- *;
- apply IN_Union with (Paire E E); auto with zfc v62.
+ apply IN_Union with (Paire E E); auto with zfc.
 Qed.
 
 
 Theorem INC_Succ : forall E : Ens, INC E (Succ E).
 unfold INC in |- *; unfold Succ in |- *.
 intros.
-apply IN_Union with E; auto with zfc v62.
+apply IN_Union with E; auto with zfc.
 Qed.
 
 Hint Resolve IN_Succ INC_Succ: zfc.
@@ -940,10 +940,10 @@ unfold Succ in i.
 elim (Union_IN (Paire E (Sing E)) E' i).
 intros E1; simple induction 1; intros i1 i2.
 elim (Paire_IN E (Sing E) E1 i1).
-intros; right; apply IN_sound_right with E1; auto with zfc v62.
+intros; right; apply IN_sound_right with E1; auto with zfc.
 intros; left; cut (IN E' (Sing E)).
-auto with zfc v62.
-apply IN_sound_right with E1; auto with zfc v62.
+auto with zfc.
+apply IN_sound_right with E1; auto with zfc.
 
 Qed.
 
@@ -957,13 +957,13 @@ elim (IN_EXType (sup A f) (sup A f) i); intros a e.
 simpl in a.
 change (EQ (sup A f) (f a)) in e.
 elim (r a).
-apply IN_sound_right with (sup A f); auto with zfc v62.
-exists a; auto with zfc v62.
+apply IN_sound_right with (sup A f); auto with zfc.
+exists a; auto with zfc.
 Qed.
 
 
 Theorem Nat_IN_Omega : forall n : nat, IN (Nat n) Omega.
-intros; simpl in |- *; exists n; auto with zfc v62.
+intros; simpl in |- *; exists n; auto with zfc.
 Qed.
 Hint Resolve Nat_IN_Omega: zfc.
 
@@ -972,7 +972,7 @@ Theorem IN_Omega_EXType :
  forall E : Ens, IN E Omega -> EXType _ (fun n : nat => EQ (Nat n) E).
 simpl in |- *; simple induction 1.
 intros n e.
-exists n; auto with zfc v62.
+exists n; auto with zfc.
 Qed.
 
 Theorem IN_Nat_EXType :
@@ -987,10 +987,10 @@ intros.
 change (IN E (Succ (Nat n0))) in H0.
 elim (IN_Succ_or (Nat n0) E H0).
 intros; exists n0.
-auto with zfc v62.
+auto with zfc.
 
 intros.
-elim (H E); auto with zfc v62.
+elim (H E); auto with zfc.
 Qed.
 
 
@@ -999,13 +999,13 @@ apply INC_EQ; unfold INC in |- *.
 intros.
 elim (IN_Omega_EXType E H); intros n e.
 apply IN_Union with (Nat (S n)).
-auto with zfc v62.
+auto with zfc.
 
 apply IN_sound_left with (Nat n).
-auto with zfc v62.
+auto with zfc.
 
-auto with zfc v62.
-change (IN (Nat n) (Succ (Nat n))) in |- *; auto with zfc v62.
+auto with zfc.
+change (IN (Nat n) (Succ (Nat n))) in |- *; auto with zfc.
 
 intros.
 elim (Union_IN Omega E H).
@@ -1017,9 +1017,9 @@ intros n e1.
 cut (IN E (Nat n)).
 intros.
 elim (IN_Nat_EXType n E H0); intros.
-apply IN_sound_left with (Nat x); auto with zfc v62.
+apply IN_sound_left with (Nat x); auto with zfc.
 
-apply IN_sound_right with e; auto with zfc v62.
+apply IN_sound_right with e; auto with zfc.
 Qed.
 
 
@@ -1030,13 +1030,13 @@ apply Lo.
 intros.
 elim (IN_Omega_EXType e H).
 intros n ee.
-apply Eo with (Nat n); auto with zfc v62.
+apply Eo with (Nat n); auto with zfc.
 elim n.
-auto with zfc v62.
-auto with zfc v62.
+auto with zfc.
+auto with zfc.
 intros.
-change (Ord (Succ (Nat n0))) in |- *; auto with zfc v62.
-apply EQ_sym; auto with zfc v62.
+change (Ord (Succ (Nat n0))) in |- *; auto with zfc.
+apply EQ_sym; auto with zfc.
 apply Omega_EQ_Union.
 
 Qed.
@@ -1083,11 +1083,11 @@ simpl in |- *; intros X i.
 elim i; intros a ea.
 exists (f (g a)).
 split.
-exists a; auto with zfc v62.
-apply comp with (g a); auto with zfc v62.
+exists a; auto with zfc.
+apply comp with (g a); auto with zfc.
 unfold choice in H.
 apply H; intros.
-elim (G a); intros b hb; exists b; auto with zfc v62.
+elim (G a); intros b hb; exists b; auto with zfc.
 Qed.
 
 
@@ -1126,20 +1126,20 @@ intros HC.
 apply
  (IN_Comp_P Y y
     (fun y0 : Ens => EXType Ens (fun x : Ens => IN x X /\ P x y0)));
- auto with zfc v62.
+ auto with zfc.
 intros w1 w2; simple induction 1; intros x; simple induction 1;
  intros Ix Px e.
-exists x; split; auto with zfc v62.
-apply comp_r with w1; auto with zfc v62.
+exists x; split; auto with zfc.
+apply comp_r with w1; auto with zfc.
 intros He.
 apply IN_P_Comp.
 
 intros w1 w2; simple induction 1; intros x; simple induction 1;
  intros Ix Px e.
-exists x; split; auto with zfc v62.
-apply comp_r with w1; auto with zfc v62.
-apply HY; auto with zfc v62.
-auto with zfc v62.
+exists x; split; auto with zfc.
+apply comp_r with w1; auto with zfc.
+apply HY; auto with zfc.
+auto with zfc.
 
 elim
  (Collection
@@ -1153,33 +1153,33 @@ intros y; simple induction 1; intros x; simple induction 1; intros Hx1 Hx2.
 elim (HY x Hx1).
 intros y'; simple induction 1; intros Hy'1 Hy'2.
 elim Hy'2.
-intros Hy'3; apply IN_sound_left with y'; auto with zfc v62.
-apply fp with x; auto with zfc v62.
+intros Hy'3; apply IN_sound_left with y'; auto with zfc.
+apply fp with x; auto with zfc.
 simple induction 1; intros Hy'3 Hy'4.
 elim (Hy'3 y Hx2).
 intros HP; exists (Comp Y (fun y : Ens => EQ y Vide -> False)).
 intros y; simple induction 1; intros x; simple induction 1; intros Hx1 Hx2.
 apply IN_P_Comp.
-intros w1 w2 Hw1 Hw Hw2; apply Hw1; apply EQ_tran with w2; auto with zfc v62.
+intros w1 w2 Hw1 Hw Hw2; apply Hw1; apply EQ_tran with w2; auto with zfc.
 elim (HY x).
 intros y'; simple induction 1; intros Hy'1 Hy'2.
 elim Hy'2; intros Hy'3.
-apply IN_sound_left with y'; auto with zfc v62.
-apply fp with x; auto with zfc v62.
+apply IN_sound_left with y'; auto with zfc.
+apply fp with x; auto with zfc.
 elim Hy'3; intros Hy'4 Hy'5.
-elim (Hy'4 y); auto with zfc v62.
+elim (Hy'4 y); auto with zfc.
 assumption.
-intros e; apply HP; exists x; split; auto with zfc v62; apply comp_r with y;
- auto with zfc v62; apply fp; auto with zfc v62.
+intros e; apply HP; exists x; split; auto with zfc; apply comp_r with y;
+ auto with zfc; apply fp; auto with zfc.
 intros x x' y e Hx; elim Hx; intros Hx1.
-left; apply comp_l with x; auto with zfc v62.
+left; apply comp_l with x; auto with zfc.
 right; elim Hx1; intros Hx2 Hx3; split.
 2: assumption.
-intros y' Hy'; apply (Hx2 y'); apply comp_l with x'; auto with zfc v62.
+intros y' Hy'; apply (Hx2 y'); apply comp_l with x'; auto with zfc.
 intros x; elim (EM (EXType _ (fun y : Ens => P x y))); intros Hx.
 elim Hx; intros x0 Hx0; exists x0; left; assumption.
-exists Vide; right; split; auto with zfc v62.
-intros y Hy; elim Hx; exists y; auto with zfc v62.
+exists Vide; right; split; auto with zfc.
+intros y Hy; elim Hx; exists y; auto with zfc.
 Qed.
 
 
@@ -1231,9 +1231,9 @@ simple induction E.
 intros A f HR.
 simpl in |- *.
 split; intros.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 
-exists y; auto with zfc v62.
+exists y; auto with zfc.
 Qed.
 
 Theorem EQC_tran : forall E1 E2 E3 : Ens, EQC E1 E2 -> EQC E2 E3 -> EQC E1 E3.
@@ -1243,19 +1243,19 @@ split; (elim X2; intros; elim X3; intros).
 elim (a x); intros.
 elim (a0 x0); intros.
 exists x1.
-apply X with (e0 x0); auto with zfc v62.
+apply X with (e0 x0); auto with zfc.
 elim (b0 y); intros.
 elim (b x); intros.
 exists x0.
-apply X with (e0 x); auto with zfc v62.
+apply X with (e0 x); auto with zfc.
 Qed.
 
 Theorem EQC_sym : forall E1 E2 : Ens, EQC E1 E2 -> EQC E2 E1.
 simple induction E1; simple induction E2; simpl in |- *; intros.
 elim X1; intros; split; intros.
 elim (b x); intros.
-exists x0; auto with zfc v62.
-elim (a y); intros; exists x; auto with zfc v62.
+exists x0; auto with zfc.
+elim (a y); intros; exists x; auto with zfc.
 Qed.
 
 Theorem EQC_INC : forall E E' : Ens, EQC E E' -> CINC E E'.
@@ -1264,7 +1264,7 @@ simple induction E; simple induction E'; simpl in |- *; intros;
 elim X1; intros.
 elim X2; intros.
 elim (a x); intros.
-exists x0; apply EQC_tran with (e x); auto with zfc v62.
+exists x0; apply EQC_tran with (e x); auto with zfc.
 Qed.
 
 Hint Resolve EQC_sym EQC_refl EQC_INC: zfc.
@@ -1273,10 +1273,10 @@ Theorem CINC_EQC : forall E E' : Ens, CINC E E' -> CINC E' E -> EQC E E'.
 simple induction E; simple induction E'; unfold CINC in |- *; simpl in |- *;
  intros; split; intros.
 apply X1.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 cut (depprod A (fun x : A => EQC (e0 y) (e x)));
- try (simple induction 1; intros x p; exists x; auto with zfc v62).
-apply X2; exists y; auto with zfc v62.
+ try (simple induction 1; intros x p; exists x; auto with zfc).
+apply X2; exists y; auto with zfc.
 Qed.
 
 Hint Resolve CINC_EQC: zfc.
@@ -1289,23 +1289,23 @@ Theorem CIN_sound_left :
  forall E E' E'' : Ens, EQC E E' -> CIN E E'' -> CIN E' E''.
 simple induction E''; simpl in |- *; intros.
 elim X1; intros y p; exists y.
-apply EQC_tran with E; auto with zfc v62.
+apply EQC_tran with E; auto with zfc.
 Qed.
 
 Theorem CIN_sound_right :
  forall E E' E'' : Ens, EQC E' E'' -> CIN E E' -> CIN E E''.
 simple induction E'; simple induction E''; simpl in |- *; intros.
 elim X1; intros Xl Xr; elim X2; intros y p; elim (Xl y); intros y0 p0;
- exists y0; apply EQC_tran with (e y); auto with zfc v62.
+ exists y0; apply EQC_tran with (e y); auto with zfc.
 Qed.
 
 Theorem CINC_refl : forall E : Ens, CINC E E.
-unfold CINC in |- *; auto with zfc v62.
+unfold CINC in |- *; auto with zfc.
 Qed.
 
 Theorem CINC_tran :
  forall E E' E'' : Ens, CINC E E' -> CINC E' E'' -> CINC E E''.
-unfold CINC in |- *; auto with zfc v62.
+unfold CINC in |- *; auto with zfc.
 Qed.
 
 
@@ -1313,7 +1313,7 @@ Theorem CINC_sound_left :
  forall E E' E'' : Ens, EQC E E' -> CINC E E'' -> CINC E' E''.
 simple induction E''; unfold CINC in |- *; simpl in |- *;
  intros A f XR e X1 E0 i; apply X1.
-apply CIN_sound_right with E'; auto with zfc v62.
+apply CIN_sound_right with E'; auto with zfc.
 Qed.
 
 Theorem CINC_sound_right :
@@ -1322,7 +1322,7 @@ simple induction E'; simple induction E''; unfold CINC in |- *; simpl in |- *;
  intros.
 elim (X2 E0); try assumption; intros.
 elim X1; intros XA XB; elim (XA x); intros.
-exists x0; apply EQC_tran with (e x); auto with zfc v62.
+exists x0; apply EQC_tran with (e x); auto with zfc.
 Qed.
 
 
@@ -1333,8 +1333,8 @@ Theorem tout_vide_est_VideC :
  forall E : Ens, (forall E' : Ens, CIN E' E -> F) -> EQC E Vide.
  unfold Vide in |- *; simple induction E; simpl in |- *; intros A e X H;
   split.
-intros; elim (H (e x)); auto with zfc v62.
-exists x; auto with zfc v62.
+intros; elim (H (e x)); auto with zfc.
+exists x; auto with zfc.
 simple induction y.
 Qed.
 
@@ -1345,36 +1345,36 @@ unfold Paire in |- *.
 simpl in |- *.
 intros; split.
 simple induction x.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 
 simple induction y; simpl in |- *.
-exists true; auto with zfc v62.
+exists true; auto with zfc.
 
-exists false; auto with zfc v62.
+exists false; auto with zfc.
 Qed.
 
 Theorem Paire_sound_rightC :
  forall A B B' : Ens, EQC B B' -> EQC (Paire A B) (Paire A B').
 unfold Paire in |- *; simpl in |- *; intros; split.
 simple induction x.
-exists true; auto with zfc v62.
-exists false; auto with zfc v62.
+exists true; auto with zfc.
+exists false; auto with zfc.
 simple induction y.
-exists true; auto with zfc v62.
-exists false; auto with zfc v62.
+exists true; auto with zfc.
+exists false; auto with zfc.
 Qed.
 
 
 Theorem CIN_Paire_left : forall E E' : Ens, CIN E (Paire E E').
 unfold Paire in |- *; simpl in |- *; exists true; simpl in |- *;
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Theorem CIN_Paire_right : forall E E' : Ens, CIN E' (Paire E E').
 unfold Paire in |- *; simpl in |- *; exists false; simpl in |- *;
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 Inductive sum_t (A B : Type) : Type :=
@@ -1385,7 +1385,7 @@ Hint Resolve inl_t inr_t: zfc.
 Theorem Paire_CIN :
  forall E E' A : Ens, CIN A (Paire E E') -> sum_t (EQC A E) (EQC A E').
 unfold Paire in |- *; simpl in |- *; simple induction 1; intros b; elim b;
- simpl in |- *; auto with zfc v62.
+ simpl in |- *; auto with zfc.
 Qed.
 
 Hint Resolve CIN_Paire_left CIN_Paire_right: zfc.
@@ -1393,12 +1393,12 @@ Hint Resolve CIN_Paire_left CIN_Paire_right: zfc.
 (* Singleton *)
 
 Theorem CIN_Sing : forall E : Ens, CIN E (Sing E).
-unfold Sing in |- *; auto with zfc v62.
+unfold Sing in |- *; auto with zfc.
 Qed.
 
 Theorem CIN_Sing_EQ : forall E E' : Ens, CIN E (Sing E') -> EQC E E'.
 unfold Sing in |- *; intros E E' H; elim (Paire_CIN E' E' E);
- auto with zfc v62.
+ auto with zfc.
 Qed.
 
 
@@ -1406,16 +1406,16 @@ Qed.
 Theorem EQC_EQ : forall E E' : Ens, EQC E E' -> EQ E E'.
 simple induction E; intros A f ra; simple induction E'; intros B g rb;
  simpl in |- *; simple induction 1; intros H1 H2; split.
-intros a; elim (H1 a); intros b; intros; exists b; auto with zfc v62.
-intros b; elim (H2 b); intros a; intros; exists a; auto with zfc v62.
+intros a; elim (H1 a); intros b; intros; exists b; auto with zfc.
+intros b; elim (H2 b); intros a; intros; exists a; auto with zfc.
 Qed.
 
 
 Theorem CIN_IN : forall E E' : Ens, CIN E E' -> IN E E'.
 simple induction E; intros A f ra; simple induction E'; intros B g rb;
  simple induction 1; intros a; unfold IN in |- *; exists a; 
- auto with zfc v62.
-apply EQC_EQ; auto with zfc v62.
+ auto with zfc.
+apply EQC_EQ; auto with zfc.
 Qed.
 
 
@@ -1431,7 +1431,7 @@ simple induction E; simple induction E'; simpl in |- *.
 intros.
 elim X1; intros.
 elim (a0 a); intros.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 
 Defined.
 
@@ -1442,7 +1442,7 @@ simple induction E; simpl in |- *.
 intros A f r.
 simple induction 1; simpl in |- *.
 intros.
-exists x; auto with zfc v62.
+exists x; auto with zfc.
 Qed.
 
 Theorem CIN_Union :
@@ -1453,7 +1453,7 @@ intros.
 simpl in |- *.
 elim (CIN_EXType (sup A f) E' X).
 intros x e.
-cut (EQC (pi2 (sup A f) x) E'); auto with zfc v62.
+cut (EQC (pi2 (sup A f) x) E'); auto with zfc.
 intros e1.
 cut (CIN E'' (pi2 (sup A f) x)).
 intros i1.
@@ -1463,7 +1463,7 @@ simpl in x0.
 exists (dep_i A (fun x : A => pi1 (f x)) x x0).
 simpl in |- *.
 exact e2.
-apply CIN_sound_right with E'; auto with zfc v62.
+apply CIN_sound_right with E'; auto with zfc.
 Qed.
 
 
@@ -1484,9 +1484,9 @@ intros.
 elim (CIN_EXType _ _ X1).
 simpl in |- *.
 intros.
-exists (dep_i A (fun x : A => pi1 (f x)) x x1); auto with zfc v62.
+exists (dep_i A (fun x : A => pi1 (f x)) x x1); auto with zfc.
 
-apply CIN_sound_right with E'; auto with zfc v62.
+apply CIN_sound_right with E'; auto with zfc.
 Qed.
 
 (* idem depprod *)
@@ -1505,13 +1505,13 @@ intros a b; simpl in |- *.
 intros.
 exists (f a).
 split.
-exists a; auto with zfc v62.
+exists a; auto with zfc.
 
-apply CIN_sound_left with (pi2 (f a) b); auto with zfc v62.
+apply CIN_sound_left with (pi2 (f a) b); auto with zfc.
 simpl in |- *.
 generalize b; elim (f a); simpl in |- *.
 intros.
-exists b0; auto with zfc v62.
+exists b0; auto with zfc.
 Qed.
 
 
@@ -1532,22 +1532,22 @@ elim (EQC_EXType (f x0) (f' x1) p0 p).
 intros.
 exists (dep_i A' (fun x : A' => pi1 (f' x)) x1 x2).
 simpl in |- *.
-auto with zfc v62.
+auto with zfc.
 
 simple induction y; intros.
 elim (b x); intros.
-cut (EQC (f' x) (f x0)); auto with zfc v62.
+cut (EQC (f' x) (f x0)); auto with zfc.
 intros e.
 elim (EQC_EXType (f' x) (f x0) e p); intros.
 exists (dep_i A (fun x0 : A => pi1 (f x0)) x0 x1).
-simpl in |- *; auto with zfc v62.
+simpl in |- *; auto with zfc.
 Qed.
 
 Theorem Union_monC :
  forall E E' : Ens, CINC E E' -> CINC (Union E) (Union E').
 unfold CINC in |- *; intros.
 elim (Union_CIN E E0 X0); intros.
-apply CIN_Union with x; elim p; intros; auto with zfc v62.
+apply CIN_Union with x; elim p; intros; auto with zfc.
 Qed.
 
 
@@ -1608,8 +1608,8 @@ Theorem inj_sound : forall E1 E2 : Ens', EQ' E1 E2 -> EQ (inj E1) (inj E2).
 simple induction E1; intros A1 f1 fr1; simple induction E2; intros A2 f2 r2;
  simpl in |- *.
 simple induction 1; intros HR1 HR2; split.
-intros a1; elim (HR1 a1); intros a2 Ha2; exists a2; auto with zfc v62.
-intros a2; elim (HR2 a2); intros a1 Ha1; exists a1; auto with zfc v62.
+intros a1; elim (HR1 a1); intros a2 Ha2; exists a2; auto with zfc.
+intros a2; elim (HR2 a2); intros a1 Ha1; exists a1; auto with zfc.
 Qed.
 
 
@@ -1632,14 +1632,14 @@ simple induction E; intros A f HR.
 simpl in |- *; split.
 intros P; exists P; split.
 intros c; elim c; intros a p.
-exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros c; elim c; intros a p.
-exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros P; exists P; split.
 intros c; elim c; intros a p.
-exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros c; elim c; intros a p.
-exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 Qed.
 
 
@@ -1648,13 +1648,13 @@ Qed.
 Definition Big := sup Ens' inj.
 
 Theorem Big_is_big : forall E : Ens', IN (inj E) Big.
-intros E; unfold Big in |- *; simpl in |- *; exists E; auto with zfc v62.
+intros E; unfold Big in |- *; simpl in |- *; exists E; auto with zfc.
 Qed.
 
 Theorem IN_Big_small :
  forall E : Ens, IN E Big -> EXType' _ (fun E' : Ens' => EQ E (inj E')).
 unfold Big in |- *; simpl in |- *; simple induction 1; intros E' HE';
- exists E'; auto with zfc v62.
+ exists E'; auto with zfc.
 Qed.
 
 
@@ -1662,7 +1662,7 @@ Theorem IN_small_small :
  forall (E : Ens) (E' : Ens'),
  IN E (inj E') -> EXType' _ (fun E1 : Ens' => EQ E (inj E1)).
 simple induction E'; intros A' f' HR'; simpl in |- *; simple induction 1;
- intros a' e'; exists (f' a'); auto with zfc v62.
+ intros a' e'; exists (f' a'); auto with zfc.
 Qed.
 
 
@@ -1689,9 +1689,9 @@ cut
  ((fun x : Ens => IN x x -> False) (Comp U (fun x : Ens => IN x x -> False))).
 intros HR.
 apply HR.
-apply IN_P_Comp; auto with zfc v62.
-intros w1 w2 HF e i; apply HF; apply IN_sound_left with w2; auto with zfc v62;
- apply IN_sound_right with w2; auto with zfc v62.
+apply IN_P_Comp; auto with zfc.
+intros w1 w2 HF e i; apply HF; apply IN_sound_left with w2; auto with zfc;
+ apply IN_sound_right with w2; auto with zfc.
 intros H.
 cut
  (IN (Comp U (fun x : Ens => IN x x -> False))
@@ -1705,8 +1705,8 @@ intros ww.
 exact
  (IN_Comp_P U (Comp U (fun x : Ens => IN x x -> False))
     (fun x : Ens => IN x x -> False) ww H).
-intros w1 w2 HF e i; apply HF; apply IN_sound_left with w2; auto with zfc v62;
- apply IN_sound_right with w2; auto with zfc v62.
+intros w1 w2 HF e i; apply HF; apply IN_sound_left with w2; auto with zfc;
+ apply IN_sound_right with w2; auto with zfc.
 assumption.
 
 Qed.
