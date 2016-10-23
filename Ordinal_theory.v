@@ -32,7 +32,7 @@ change
 intros E i.
 apply
  IN_sound_right with (Union (sup A1 (fun a1 : A1 => Power (Vee (f1 a1)))));
- try trivial with zfc v62.
+ try trivial with zfc.
 apply Union_sound.
 split.
 intros a1; elim (e1 a1).
@@ -43,7 +43,7 @@ apply HR1.
 assumption.
 
 intros a2; elim (e2 a2); intros a1 h; exists a1; apply Power_sound;
- auto with zfc v62.
+ auto with zfc.
 
 change
   (forall E : Ens,
@@ -58,10 +58,10 @@ apply
 apply Union_sound.
 split.
 intros a2; elim (e2 a2); intros a1 h; exists a1.
-apply Power_sound; auto with zfc v62.
+apply Power_sound; auto with zfc.
 
 intros a1; elim (e1 a1); intros a2 h; exists a2.
-apply Power_sound; auto with zfc v62.
+apply Power_sound; auto with zfc.
 
 assumption.
 Qed.
@@ -76,9 +76,9 @@ change (IN E (Union (sup A (fun a : A => Power (Vee (f a)))))) in |- *.
 apply IN_Union with (Power (Vee W)).
 elim i; intros a h.
 exists a.
-apply Power_sound; apply Vee_sound; auto with zfc v62.
+apply Power_sound; apply Vee_sound; auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 apply INC_IN_Power.
 assumption.
 Qed.
@@ -90,10 +90,10 @@ intros o inc.
 unfold Succ in |- *.
 apply IN_Vee with (sup A f).
 apply IN_P_Comp.
-intros; apply Ord_sound with w1; auto with zfc v62.
+intros; apply Ord_sound with w1; auto with zfc.
 
-auto with zfc v62.
-apply INC_IN_Power; auto with zfc v62.
+auto with zfc.
+apply INC_IN_Power; auto with zfc.
 
 assumption.
 
@@ -123,17 +123,17 @@ intros T c.
 elim c; intros i1 i2.
 elim i1; intros a e.
 exists (f a); split.
-exists a; auto with zfc v62.
+exists a; auto with zfc.
 
 apply IN_Power_INC.
-apply IN_sound_right with T; auto with zfc v62.
+apply IN_sound_right with T; auto with zfc.
 Qed.
 
 Lemma mon_Vee : forall E1 E2 : Ens, INC E1 E2 -> INC (Vee E1) (Vee E2).
 intros E1 E2 inc; unfold INC in |- *; intros X i.
 elim (IN_Vee_EXType _ _ i).
 intros Y; simple induction 1; intros i1 inc1.
-apply IN_Vee with Y; auto with zfc v62.
+apply IN_Vee with Y; auto with zfc.
 
 Qed.
 
@@ -142,10 +142,10 @@ Lemma IN_Succ_INC : forall E X : Ens, IN X (Succ E) -> INC X E.
 unfold Succ in |- *.
 intros E X i.
 cut (IN X (Power E)).
-auto with zfc v62.
-auto with zfc v62.
+auto with zfc.
+auto with zfc.
 
-apply (Comp_INC (Power E) Ord); try trivial with zfc v62.
+apply (Comp_INC (Power E) Ord); try trivial with zfc.
 Qed.
 
 
@@ -160,13 +160,13 @@ intros E X o i.
 elim (IN_Vee_EXType _ _ i).
 intros Y; simple induction 1; intros i1 inc.
 exists Y; split.
-apply IN_Succ_INC; auto with zfc v62.
+apply IN_Succ_INC; auto with zfc.
 
 split.
-auto with zfc v62.
-apply IN_Ord_Ord with (Succ E); auto with zfc v62.
+auto with zfc.
+apply IN_Ord_Ord with (Succ E); auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 Qed.
 
 Lemma IN_Vee_Succ :
@@ -175,14 +175,14 @@ Lemma IN_Vee_Succ :
  forall Y : Ens, Ord Y -> INC Y E -> INC X (Vee Y) -> IN X (Vee (Succ E)).
 intros E X o Y o1 inc inc1.
 apply IN_Vee with Y.
-auto with zfc v62.
-unfold Succ in |- *; apply IN_P_Comp; auto with zfc v62.
-intros; apply Ord_sound with w1; auto with zfc v62.
+auto with zfc.
+unfold Succ in |- *; apply IN_P_Comp; auto with zfc.
+intros; apply Ord_sound with w1; auto with zfc.
 
-auto with zfc v62.
-apply INC_IN_Power; auto with zfc v62.
+auto with zfc.
+apply INC_IN_Power; auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 Qed.
 
 
@@ -213,10 +213,10 @@ apply Union_Ord.
 simple induction 1; intros a h.
 apply
  Ord_sound with (PI11 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a)).
-auto with zfc v62.
+auto with zfc.
 
 elim (PI21 _ _ (HR a)).
-auto with zfc v62.
+auto with zfc.
 
 apply
  IN_Vee_Succ
@@ -231,24 +231,24 @@ intros E'; simple induction 1; intros a c.
 apply
  Ord_sound with (PI11 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a)).
 elim (PI21 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a));
- auto with zfc v62.
+ auto with zfc.
 
 elim (PI21 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a));
- auto with zfc v62.
+ auto with zfc.
 
 apply Union_Ord.
 intros E'; simple induction 1; intros a e.
 apply
  Ord_sound with (PI11 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a));
- auto with zfc v62.
+ auto with zfc.
 elim (PI21 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a));
- auto with zfc v62.
+ auto with zfc.
 
-auto with zfc v62.
+auto with zfc.
 
 unfold INC in |- *; intros E' i.
 elim i; intros a e.
-apply IN_sound_left with (f a); auto with zfc v62.
+apply IN_sound_left with (f a); auto with zfc.
 cut
  (INC (PI11 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a))
     (Union
@@ -265,10 +265,10 @@ apply
     inc).
 elim (PI21 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a)).
 elim (PI21 Ens (fun L : Ens => Ord L /\ IN (f a) (Vee L)) (HR a)).
-auto with zfc v62.
+auto with zfc.
 
 apply IN_INC_Union.
-exists a; auto with zfc v62.
+exists a; auto with zfc.
 
 Qed.
 

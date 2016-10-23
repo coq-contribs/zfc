@@ -69,8 +69,8 @@ Theorem inj_sound : forall E1 E2 : Ens', EQ' E1 E2 -> EQ (inj E1) (inj E2).
 simple induction E1; intros A1 f1 fr1; simple induction E2; intros A2 f2 r2;
  simpl in |- *.
 simple induction 1; intros HR1 HR2; split.
-intros a1; elim (HR1 a1); intros a2 Ha2; exists a2; auto with zfc v62.
-intros a2; elim (HR2 a2); intros a1 Ha1; exists a1; auto with zfc v62.
+intros a1; elim (HR1 a1); intros a2 Ha2; exists a2; auto with zfc.
+intros a2; elim (HR2 a2); intros a1 Ha1; exists a1; auto with zfc.
 Qed.
 
 
@@ -93,14 +93,14 @@ simple induction E; intros A f HR.
 simpl in |- *; split.
 intros P; exists P; split.
 intros c; elim c; intros a p.
-exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros c; elim c; intros a p.
-exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros P; exists P; split.
 intros c; elim c; intros a p.
-exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 intros c; elim c; intros a p.
-exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc v62.
+exists (dep_i'' A (fun a0 : A => P a0) a p); simpl in |- *; auto with zfc.
 Qed.
 
 
@@ -109,13 +109,13 @@ Qed.
 Definition Big := sup Ens' inj.
 
 Theorem Big_is_big : forall E : Ens', IN (inj E) Big.
-intros E; unfold Big in |- *; simpl in |- *; exists E; auto with zfc v62.
+intros E; unfold Big in |- *; simpl in |- *; exists E; auto with zfc.
 Qed.
 
 Theorem IN_Big_small :
  forall E : Ens, IN E Big -> EXType' _ (fun E' : Ens' => EQ E (inj E')).
 unfold Big in |- *; simpl in |- *; simple induction 1; intros E' HE';
- exists E'; auto with zfc v62.
+ exists E'; auto with zfc.
 Qed.
 
 
@@ -123,7 +123,7 @@ Theorem IN_small_small :
  forall (E : Ens) (E' : Ens'),
  IN E (inj E') -> EXType' _ (fun E1 : Ens' => EQ E (inj E1)).
 simple induction E'; intros A' f' HR'; simpl in |- *; simple induction 1;
- intros a' e'; exists (f' a'); auto with zfc v62.
+ intros a' e'; exists (f' a'); auto with zfc.
 Qed.
 
 

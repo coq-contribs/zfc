@@ -130,7 +130,7 @@ Hint Resolve INC_EQ: zfc.
 Theorem IN_sound_left :
  forall E E' E'' : Ens, EQ E E' -> IN E E'' -> IN E' E''.
 simple induction E''; intros A'' f'' r'' e; simpl in |- *; simple induction 1;
- intros a'' p; exists a''; apply EQ_tran with E; auto with zfc v62.
+ intros a'' p; exists a''; apply EQ_tran with E; auto with zfc.
 Qed.
 
 Theorem IN_sound_right :
@@ -146,11 +146,11 @@ Qed.
 (* Inclusion is reflexive, transitive, extentional *)
 
 Theorem INC_refl : forall E : Ens, INC E E.
-unfold INC in |- *; auto with zfc v62.
+unfold INC in |- *; auto with zfc.
 Qed.
 
 Theorem INC_tran : forall E E' E'' : Ens, INC E E' -> INC E' E'' -> INC E E''.
-unfold INC in |- *; auto with zfc v62.
+unfold INC in |- *; auto with zfc.
 Qed.
 
 
@@ -158,7 +158,7 @@ Theorem INC_sound_left :
  forall E E' E'' : Ens, EQ E E' -> INC E E'' -> INC E' E''.
 simple induction E''; unfold INC in |- *; simpl in |- *;
  intros A f HR e H1 E0 i; apply H1.
-apply IN_sound_right with E'; auto with zfc v62.
+apply IN_sound_right with E'; auto with zfc.
 Qed.
 
 Theorem INC_sound_right :
@@ -167,7 +167,7 @@ simple induction E'; simple induction E''; unfold INC in |- *; simpl in |- *;
  intros.
 elim (H2 E0); try assumption; intros.
 elim H1; intros HA HB; elim (HA x); intros.
-exists x0; apply EQ_tran with (e x); auto with zfc v62.
+exists x0; apply EQ_tran with (e x); auto with zfc.
 Qed.
 
 
