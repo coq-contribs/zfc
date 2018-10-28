@@ -3,6 +3,7 @@ The main source of the proofs:
 https://math.stackexchange.com/questions/452809/epsilon-induction-implies-axiom-of-foundation-or-regularity
 Author: Georgy Dunaev, georgedunaev@gmail.com
 *)
+Add LoadPath "/home/user/0my/GITHUB/".
 
 Require Import ZFC.Sets.
 Require Import Setoid.
@@ -28,9 +29,11 @@ apply H0.
 exact G.
 Defined.
 
-(* (P x) means "Set x is regular." *)
+(* (P x) means "Every set that contains x as an element is regular." *)
 Definition P x := forall u : Ens, (IN x u -> exists y,
 IN y u /\ forall z, IN z u -> ~ IN z y).
+
+Definition epsmin a b := IN a b /\ forall c, IN c b -> ~ IN c a.
 
 (* Soundness of the definition of P. *)
 Theorem sou_P : forall a b : Ens, EQ a b -> P a <-> P b.
@@ -154,6 +157,100 @@ split.
 Defined.
 
 End ClassicRegularity.
+
+(* Other theorems *)
+
+Theorem axExt : forall x y : Ens,
+   EQ x y <-> forall z, (IN z x <-> IN z y).
+Proof.
+intros.
+split.
++ intros.
+  split.
+  - apply IN_sound_right. exact H.
+  - apply IN_sound_right. apply EQ_sym. exact H.
++ induction x as [A f], y as [B g].
+  intro K.
+  simpl in * |- *.
+  split.
+  - intro x.
+    apply K.
+    exists x.
+    apply EQ_refl.
+  - intro y.
+    assert (Q:EXType B (fun y0 : B => EQ (g y) (g y0))).
+    * exists y.
+      apply EQ_refl.
+    * destruct (proj2 (K (g y)) Q).
+      exists x.
+      apply EQ_sym.
+      exact H0.
+Defined.
+
+(* every set is a class *)
+(* 1) function *)
+Theorem esiacf : Ens -> (Ens -> Prop).
+Proof.
+intro e.
+exact (fun x => IN x e).
+Defined.
+
+(* "is a set" predicate *)
+Definition ias (s: Ens -> Prop) : Prop.
+Proof.
+exact (EXType _ (fun x:Ens => forall w, s w <-> esiacf x w)).
+Defined.
+
+Require Import ZFC.Axioms.
+
+(* class must respect extensional equality
+   sree is a witness of the soundness of class' definition *)
+Section TheoremsAboutClasses.
+Context (s:Ens->Prop)
+        (sree : forall (w1 w2:Ens), EQ w1 w2 -> s w1 <-> s w2).
+
+Theorem rewr (w1 w2:Ens) (J:s w1) (H : EQ w1 w2) : s w2.
+Proof.
+rewrite <- (sree w1 w2); assumption.
+Defined.
+
+(* subclass of a set is a set *)
+Theorem scosias (m:Ens) 
+(sc : forall x, s x -> (esiacf m) x) 
+: ias s.
+Proof.
+unfold ias.
+unfold esiacf in * |- *.
+(* { x e. m | s x }*)
+exists (Comp m s).
+intro w.
+split.
++ intro u.
+  pose(y:=sc w u).
+  unfold esiacf in * |- *.
+  apply IN_P_Comp.
+  * intros w1 w2 K H.
+    apply (rewr _ _  K H).
+  * exact y.
+  * exact u.
++ intro u.
+  Check IN_Comp_P m.
+  apply (IN_Comp_P m).
+  exact rewr.
+  exact u.
+Defined.
+
+End TheoremsAboutClasses.
+
+Theorem INC_antisym : forall E E' : Ens,
+  INC E E' -> INC E' E -> EQ E E'.
+Proof.
+unfold INC in |- *; auto with zfc.
+Show Proof.
+Defined.
+
+Require Import ZFC.Cartesian.
+Require Import ZFC.Replacement.
 
 
 
