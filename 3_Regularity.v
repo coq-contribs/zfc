@@ -19,7 +19,6 @@ Theorem eps_ind (R:Ens->Prop)
 Proof.
 intros.
 induction z.
-(*Check Ens_ind.*)
 apply H.
 simpl.
 intros y q.
