@@ -1,0 +1,6 @@
+*.vo
+*.glob
+*.aux
+*.coq
+*.conf
+.coqdeps.d
