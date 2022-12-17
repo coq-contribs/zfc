@@ -1,4 +1,5 @@
 -R . ZFC
+-arg -w -arg -deprecated-hint-without-locality
 Axioms.v
 Hierarchy.v
 Plump.v

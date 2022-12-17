@@ -1002,9 +1002,7 @@ apply IN_Union with (Nat (S n)).
 auto with zfc.
 
 apply IN_sound_left with (Nat n).
-auto with zfc.
-
-auto with zfc.
+auto with zfc; try auto with zfc.
 change (IN (Nat n) (Succ (Nat n))) in |- *; auto with zfc.
 
 intros.
